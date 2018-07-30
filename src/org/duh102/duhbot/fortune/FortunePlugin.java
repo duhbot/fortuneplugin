@@ -13,7 +13,7 @@ import org.duh102.duhbot.functions.*;
 
 public class FortunePlugin extends ListenerAdapter implements DuhbotFunction
 {
-  static final List<String> FORT_COMM = Arrays.asList("fortune", "-s");
+  static final List<String> FORT_COMM = Arrays.asList("fortune", "-s", "fortunes");
   static final String PREFIX = ".fortune";
   
   public HashMap<String,String> getHelpFunctions()
