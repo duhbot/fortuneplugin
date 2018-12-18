@@ -1,17 +1,14 @@
 package org.duh102.duhbot.fortune;
 
+import java.io.*;
 import java.util.*;
-import java.io.Reader;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.io.IOException;
 
 import org.pircbotx.hooks.*;
 import org.pircbotx.hooks.events.*;
 
 import org.duh102.duhbot.functions.*;
 
-public class FortunePlugin extends ListenerAdapter implements DuhbotFunction
+public class FortunePlugin extends ListenerAdapter implements ListeningPlugin
 {
   static final List<String> FORT_COMM = Arrays.asList("fortune", "-s", "fortunes");
   static final String PREFIX = ".fortune";
