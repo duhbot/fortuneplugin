@@ -24,6 +24,9 @@ public class FortunePlugin extends ListenerAdapter implements ListeningPlugin {
 
     private Map<String, File> fortuneDBMap;
 
+    private List<String> defaultFortunePriorities = Arrays.asList("fortunecookie");
+    private String selectedDefaultFortune = null;
+
     private static String listFortuneFiles(Map<String, File> fortunes) {
         return fortunes.keySet().stream().sorted()
                 .reduce((a, b) -> a + ", " + b).get();
@@ -62,6 +65,12 @@ public class FortunePlugin extends ListenerAdapter implements ListeningPlugin {
                 fortuneDBMap.put(fortuneDB.getName().replace(".dat", ""),
                         fortuneDB);
             }
+            for( String defaultFortuneItem : defaultFortunePriorities ) {
+                if( fortuneDBMap.containsKey(defaultFortuneItem) ) {
+                    selectedDefaultFortune = defaultFortuneItem;
+                    break;
+                }
+            }
         }
         if( fortuneDBMap != null && fortuneDBMap.size() > 0 ) {
             System.err.printf("Found fortune databases %s\n",
@@ -92,6 +101,9 @@ public class FortunePlugin extends ListenerAdapter implements ListeningPlugin {
         return getAFortune(null);
     }
     private String getAFortune(String db) {
+        if(db == null && selectedDefaultFortune != null) {
+            db = selectedDefaultFortune;
+        }
         StringBuilder toRet = new StringBuilder();
         try {
             ProcessBuilder builder =
